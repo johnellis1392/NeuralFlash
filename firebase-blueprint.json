@@ -1,0 +1,41 @@
+{
+  "entities": {
+    "Card": {
+      "title": "Flashcard",
+      "description": "A study card with front and back content.",
+      "type": "object",
+      "properties": {
+        "front": { "type": "string" },
+        "back": { "type": "string" },
+        "category": { "type": "string" },
+        "tags": { "type": "array" }
+      },
+      "required": ["front", "back", "category"]
+    },
+    "UserProgress": {
+      "title": "User Progress",
+      "description": "Spaced repetition state for a specific user and card.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "cardId": { "type": "string" },
+        "nextReview": { "type": "string", "format": "date-time" },
+        "interval": { "type": "number" },
+        "easeFactor": { "type": "number" },
+        "reps": { "type": "number" },
+        "lastReviewed": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "cardId", "nextReview", "interval", "easeFactor", "reps"]
+    }
+  },
+  "firestore": {
+    "/cards/{cardId}": {
+      "schema": "Card",
+      "description": "Global collection of flashcards."
+    },
+    "/userProgress/{progressId}": {
+      "schema": "UserProgress",
+      "description": "User-specific review state for cards."
+    }
+  }
+}
